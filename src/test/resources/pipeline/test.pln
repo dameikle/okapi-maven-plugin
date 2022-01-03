@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rainbowPipeline version="1"><step class="net.sf.okapi.steps.common.RawDocumentToFilterEventsStep"></step>
+<step class="net.sf.okapi.steps.rainbowkit.creation.ExtractionStep">#v1
+writerClass=net.sf.okapi.steps.rainbowkit.xliff.XLIFFPackageWriter
+packageName=pack1
+packageDirectory=${inputRootDir}
+supportFiles=
+message=
+outputManifest.b=true
+createZip.b=false
+sendOutput.b=false
+writerOptions.placeholderMode.b=true
+writerOptions.includeNoTranslate.b=true
+writerOptions.setApprovedAsNoTranslate.b=false
+writerOptions.copySource.b=true
+writerOptions.includeAltTrans.b=true
+writerOptions.includeCodeAttrs.b=true
+writerOptions.includeIts.b=true
+writerOptions.escapeGT.b=false</step>
+</rainbowPipeline>
