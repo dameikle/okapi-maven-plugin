@@ -1,4 +1,7 @@
 # okapi-maven-plugin
+[![license](https://img.shields.io/github/license/dameikle/okapi-maven-plugin.svg?maxAge=2592000)](http://www.apache.org/licenses/LICENSE-2.0)
+![build](https://github.com/dameikle/okapi-maven-plugin/actions/workflows/maven.yml/badge.svg)
+
 
 Maven plugin that allows execution of common actions using the [Okapi Framework](http://okapiframework.org) 
 within a Maven Project, inspired by the [okapi-ant](https://github.com/tingley/okapi-ant) project.
