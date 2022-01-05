@@ -102,7 +102,9 @@ mvn okapi:pipeline
     <!-- Mandatory inputFiles using Maven FileSet format-->
     <!-- See https://maven.apache.org/shared/file-management/fileset.html for more details -->
     <inputFiles>
+        <!-- Mandatory directory - can be absolute (include Maven variables), or relative to project baseDir -->
         <directory>input</directory>
+        <!-- Optional - Includes or Excludes -->
         <includes>
             <include>**/*.txt</include>
             <include>**/*.md</include>
