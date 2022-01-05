@@ -25,7 +25,7 @@ To build run the following from inside the _okapi-maven-plugin_ directory:
 mvn clean package
 ```
 
-The plugin is released used GitHub Packages (see _Usage_ below for more details), however to install a local copy from
+The plugin is released via the Sonatype OSSRH (see _Usage_ below for more details), however to install a local copy from
 this repo, you can run:
 ```bash
 mvn clean install
