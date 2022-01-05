@@ -33,20 +33,33 @@ mvn clean install
 
 ## Usage
 
-Currently, the plugin is released used [GitHub Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
-
-To be able to access this package you will need to configure access within your Maven settings by following
-the [Working with the Apache Maven registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry#authenticating-to-github-packages) guide.
+The plugin is being released to the Sonatype OSSRH (OSS Repository Hosting) repository. Until an initial release is made
+and available on Maven Central, you will need to add the OSSRH to your Maven settings to access SNAPSHOT versions.
 
 The plugin repository details required for this guide are shown below:
 ```xml
 <pluginRepository>
-  <id>github</id>
-  <url>https://maven.pkg.github.com/dameikle/okapi-maven-plugin</url>
-  <snapshots>
-    <enabled>true</enabled>
-  </snapshots>
+    <id>oss-sonatype</id>
+    <name>oss-sonatype</name>
+    <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+    <snapshots>
+        <enabled>true</enabled>
+    </snapshots>
 </pluginRepository>
+```
+
+This could be added in a profile within your _settings.xml_, or alternatively you could add a _<pluginRepositories>_
+section to your project's POM file:
+```xml
+<pluginRepositories>
+    <pluginRepository>
+        <id>oss.sonatype.org-snapshot</id>
+        <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </pluginRepository>
+</pluginRepositories>
 ```
 
 Once you have set up access, to use the plug-in you can simple include it in your project's POM file in the plugins 
