@@ -22,13 +22,15 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-          server-id: github
-          settings-path: ${{ github.workspace }}
+          server-id: ossrh
+          server-username: OSSRH_USERNAME
+          server-password: OSSRH_TOKEN
 
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-#      - name: Publish to GitHub Packages Apache Maven
-#        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-#        env:
-#          GITHUB_TOKEN: ${{ github.token }}
+      - name: Publish Snapshot to OSSRH
+        run: mvn --batch-mode deploy
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_TOKEN: ${{ secrets.OSSRH_TOKEN }}
