@@ -9,6 +9,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.shared.model.fileset.util.FileSetManager;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -35,18 +36,19 @@ public class OkapiPipelineExecuteMojo extends BaseMojo  {
         getLog().info(String.format("Loading pipeline %s", pipeline));
         Project project = createProject();
 
-        String inputDir = inputFiles;
-        if (!Paths.get(inputDir).isAbsolute()) {
-            inputDir = Paths.get(baseDirectory.getPath(), inputFiles).toString();
-        }
-        File[] files = new File(inputDir).listFiles();
-        if (files != null) {
-            for (File file : files) {
-                if (file.isFile()) {
-                    addDocument(project, file, sourceEncoding, targetEncoding);
-                }
+        if (inputFiles != null) {
+            FileSetManager fileSetManager = new FileSetManager();
+            if (!new File(inputFiles.getDirectory()).isAbsolute()) {
+                inputFiles.setDirectory(Paths.get(mavenProject.getBasedir().getAbsolutePath(),
+                        inputFiles.getDirectory()).toString());
+            }
+            String[] files = fileSetManager.getIncludedFiles(inputFiles);
+            for (String file : files) {
+                String relFile = Paths.get(inputFiles.getDirectory(), file).toString();
+                addDocument(project, new File(relFile), sourceEncoding, targetEncoding);
             }
         }
+
         List<String> steps = wrapper.getSteps().stream()
                 .flatMap(s -> Stream.of(s.name))
                 .collect(Collectors.toList());

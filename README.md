@@ -99,8 +99,18 @@ mvn okapi:pipeline
 <configuration>
     <!-- Mandatory Path to pipeline to execute -->
     <pipeline>test.pln</pipeline>
-    <!-- Mandatory inputFiles location-->
-    <inputFiles>input</inputFiles>
+    <!-- Mandatory inputFiles using Maven FileSet format-->
+    <!-- See https://maven.apache.org/shared/file-management/fileset.html for more details -->
+    <inputFiles>
+        <directory>input</directory>
+        <includes>
+            <include>**/*.txt</include>
+            <include>**/*.md</include>
+        </includes>
+        <excludes>
+            <exclude>**/*.xml</exclude>
+        </excludes>
+    </inputFiles>
     <!-- Mandatory Source Language Name or Code-->
     <sourceLang>English</sourceLang>
     <!-- Mandatory Target Language Name or Code-->

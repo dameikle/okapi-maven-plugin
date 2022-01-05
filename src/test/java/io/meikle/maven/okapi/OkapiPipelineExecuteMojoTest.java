@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -27,6 +28,25 @@ public class OkapiPipelineExecuteMojoTest extends MojoTestBase {
         assertNotNull(pipelineMojo);
         pipelineMojo.execute();
         assertTrue(Files.exists(Paths.get(pom.getPath(), "pack1", "work", "input", "test.txt.xlf")));
+    }
+
+    /**
+     * Tests executing a pipeline using the <code>OkapiPipelineExecuteMojo</code>.
+     * @throws Exception on any error executing the mojo
+     */
+    @Test
+    public void textExecutePipelineResources() throws Exception
+    {
+        File pom = new File("target/test-classes/pipeline-filtered/");
+        assertNotNull(pom);
+        assertTrue(pom.exists());
+        OkapiPipelineExecuteMojo pipelineMojo =
+                (OkapiPipelineExecuteMojo) rule.lookupConfiguredMojo(pom, "pipeline" );
+        assertNotNull(pipelineMojo);
+        pipelineMojo.execute();
+        assertTrue(Files.exists(Paths.get(pom.getPath(), "pack1", "work", "input", "test.txt.xlf")));
+        assertTrue(Files.exists(Paths.get(pom.getPath(), "pack1", "work", "input", "test.md.xlf")));
+        assertFalse(Files.exists(Paths.get(pom.getPath(), "pack1", "work", "input", "test.xml.xlf")));
     }
 
     /**

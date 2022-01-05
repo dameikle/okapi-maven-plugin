@@ -10,6 +10,7 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+import org.apache.maven.shared.model.fileset.FileSet;
 
 import java.io.File;
 import java.nio.charset.Charset;
@@ -47,8 +48,8 @@ public abstract class BaseMojo extends AbstractMojo  {
     /**
      * Input files.
      */
-    @Parameter(property = "inputFiles", defaultValue = "" )
-    String inputFiles;
+    @Parameter(property = "inputFiles")
+    FileSet inputFiles;
 
     /**
      * Pipeline file.
