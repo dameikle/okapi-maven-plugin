@@ -203,6 +203,51 @@ mvn okapi:install
 </configuration>
 ```
 
+## Advanced Configuration
+
+### Different Okapi Version
+
+The plugin has been developed against the latest released version at the time of writing (i.e. 1.42.0) and will aim to
+track against the latest version.
+
+If you want to use a different Okapi version, you can override the Okapi Framework dependency in the plugin's
+configuration section of the POM.
+
+For example, to use Okapi Framework version 1.41.0 you could use the following:
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>io.meikle.maven.okapi</groupId>
+            <artifactId>okapi-maven-plugin</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <configuration>
+                ...
+            </configuration>
+            <dependencies>
+                <dependency>
+                    <groupId>net.sf.okapi</groupId>
+                    <artifactId>okapi-core</artifactId>
+                    <version>1.41.0</version>
+                </dependency>
+                <dependency>
+                    <groupId>net.sf.okapi.applications</groupId>
+                    <artifactId>okapi-application-rainbow</artifactId>
+                    <version>1.41.0</version>
+                    <!-- Exclude non-required UI dependencies -->
+                    <exclusions>
+                        <exclusion>
+                            <artifactId>*</artifactId>
+                            <groupId>org.eclipse.platform</groupId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+        </plugin>
+    </plugins>
+</build>
+```
+
 ## Licence
 Copyright 2021 David Meikle
 
