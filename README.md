@@ -173,7 +173,7 @@ mvn okapi:export
     </filterMappings>
     <!-- Optional Plugins to be included in the BCONF using Maven FileSet format- -->
     <!-- See https://maven.apache.org/shared/file-management/fileset.html for more details -->
-    <inputFiles>
+    <plugins>
         <!-- Optional directory - can be absolute (include Maven variables), or relative to project baseDir -->
         <!-- defaults to project baseDir -->
         <directory>input</directory>
@@ -181,7 +181,7 @@ mvn okapi:export
         <includes>
             <include>**/*.jar</include>
         </includes>
-    </inputFiles>
+    </plugins>
     <!-- Optional directory containing custom plugins -->
     <!-- Defaults to the Maven target directory -->
     <outputDirectory>/tmp</outputDirectory>
