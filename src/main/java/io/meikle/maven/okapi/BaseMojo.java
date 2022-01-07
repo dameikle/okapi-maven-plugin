@@ -11,6 +11,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.shared.model.fileset.FileSet;
+import org.apache.maven.shared.model.fileset.util.FileSetManager;
 
 import java.io.File;
 import java.nio.charset.Charset;
@@ -140,6 +141,18 @@ public abstract class BaseMojo extends AbstractMojo  {
         } else {
             return mavenProject.getBuild().getDirectory();
         }
+    }
+
+    String[] getIncludedFiles(FileSet fileSet) {
+        FileSetManager fileSetManager = new FileSetManager();
+        if (fileSet.getDirectory() == null) {
+            fileSet.setDirectory(mavenProject.getBasedir().getAbsolutePath());
+        }
+        if (!new File(fileSet.getDirectory()).isAbsolute()) {
+            fileSet.setDirectory(Paths.get(mavenProject.getBasedir().getAbsolutePath(),
+                    fileSet.getDirectory()).toString());
+        }
+        return fileSetManager.getIncludedFiles(fileSet);
     }
 
     void validateLanguages(String sourceLanguage, String targetLanguage) {

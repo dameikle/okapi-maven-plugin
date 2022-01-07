@@ -8,11 +8,11 @@ import net.sf.okapi.applications.rainbow.lib.LanguageManager;
 import net.sf.okapi.applications.rainbow.pipeline.PipelineWrapper;
 import net.sf.okapi.common.filters.FilterConfiguration;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.shared.model.fileset.FileSet;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,21 +30,16 @@ import java.util.List;
 public class OkapiExportBatchConfigMojo extends BaseMojo  {
 
     /**
-     * Individual plugin files.
+     * Plugins to be included in the BCONF.
      */
-    @Parameter(alias = "plugins")
-    String[] pluginFiles;
+    @Parameter(property = "plugins")
+    FileSet plugins;
 
     /**
      * Filter mappings.
      */
     @Parameter(alias = "filterMappings")
     FilterMapping[] filterMappings;
-
-    public void setPlugins(String[] plugins)
-    {
-        pluginFiles = plugins;
-    }
 
     public void execute() throws MojoExecutionException {
         if (StringUtils.isEmpty(bconf)) {
@@ -57,7 +52,8 @@ public class OkapiExportBatchConfigMojo extends BaseMojo  {
         // Setup Pipeline Wrapper
         PipelineWrapper pipelineWrapper = getPipelineWrapper();
         Project project = new Project(new LanguageManager());
-        if (ArrayUtils.nullToEmpty(pluginFiles).length > 0) {
+        if (plugins != null) {
+            // Explicit plugins set, so attempt to merge with any from pluginsDirectory
             configurePlugins(pipelineWrapper);
         }
 
@@ -148,8 +144,10 @@ public class OkapiExportBatchConfigMojo extends BaseMojo  {
                     }
                 }
             }
-            for (String file : ArrayUtils.nullToEmpty(pluginFiles)) {
-                File tmpFile = new File(file);
+            String[] files = getIncludedFiles(plugins);
+            for (String file : files) {
+                String relFile = Paths.get(plugins.getDirectory(), file).toString();
+                File tmpFile = new File(relFile);
                 if (!Files.exists(tmpFile.toPath())) {
                     getLog().info(String.format("Skipping file %s as it does not exist", file));
                     continue;

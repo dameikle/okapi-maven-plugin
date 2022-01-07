@@ -9,7 +9,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
-import org.apache.maven.shared.model.fileset.util.FileSetManager;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -37,12 +36,7 @@ public class OkapiPipelineExecuteMojo extends BaseMojo  {
         Project project = createProject();
 
         if (inputFiles != null) {
-            FileSetManager fileSetManager = new FileSetManager();
-            if (!new File(inputFiles.getDirectory()).isAbsolute()) {
-                inputFiles.setDirectory(Paths.get(mavenProject.getBasedir().getAbsolutePath(),
-                        inputFiles.getDirectory()).toString());
-            }
-            String[] files = fileSetManager.getIncludedFiles(inputFiles);
+            String[] files = getIncludedFiles(inputFiles);
             for (String file : files) {
                 String relFile = Paths.get(inputFiles.getDirectory(), file).toString();
                 addDocument(project, new File(relFile), sourceEncoding, targetEncoding);
