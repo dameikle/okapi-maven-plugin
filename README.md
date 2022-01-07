@@ -115,7 +115,8 @@ mvn okapi:pipeline
     <!-- Mandatory inputFiles using Maven FileSet format-->
     <!-- See https://maven.apache.org/shared/file-management/fileset.html for more details -->
     <inputFiles>
-        <!-- Mandatory directory - can be absolute (include Maven variables), or relative to project baseDir -->
+        <!-- Optional directory - can be absolute (include Maven variables), or relative to project baseDir -->
+        <!-- defaults to project baseDir -->
         <directory>input</directory>
         <!-- Optional - Includes or Excludes -->
         <includes>
@@ -170,11 +171,17 @@ mvn okapi:export
             <configuration>okf_html@test</configuration>
         </filterMapping>
     </filterMappings>
-    <!-- Optional Plugins to be included in the BCONF -->
-    <plugins>
-        <plugin>plugin_one.jar</plugin>
-        <plugin>plugin_two.jar</plugin>
-    </plugins>
+    <!-- Optional Plugins to be included in the BCONF using Maven FileSet format- -->
+    <!-- See https://maven.apache.org/shared/file-management/fileset.html for more details -->
+    <inputFiles>
+        <!-- Optional directory - can be absolute (include Maven variables), or relative to project baseDir -->
+        <!-- defaults to project baseDir -->
+        <directory>input</directory>
+        <!-- Optional - Includes or Excludes -->
+        <includes>
+            <include>**/*.jar</include>
+        </includes>
+    </inputFiles>
     <!-- Optional directory containing custom plugins -->
     <!-- Defaults to the Maven target directory -->
     <outputDirectory>/tmp</outputDirectory>
