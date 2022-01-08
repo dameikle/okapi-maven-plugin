@@ -4,7 +4,7 @@
 
   <groupId>io.meikle.maven.okapi</groupId>
   <artifactId>okapi-maven-plugin</artifactId>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
 
   <name>Okapi Framework Maven Plugin</name>
@@ -32,7 +32,7 @@
     <url>https://github.com/dameikle/okapi-maven-plugin</url>
     <connection>scm:git:git://github.com/dameikle/okapi-maven-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:dameikle/okapi-maven-plugin.git</developerConnection>
-    <tag>1.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <prerequisites>
