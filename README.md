@@ -1,6 +1,7 @@
 # okapi-maven-plugin
 [![license](https://img.shields.io/github/license/dameikle/okapi-maven-plugin.svg?maxAge=2592000)](http://www.apache.org/licenses/LICENSE-2.0)
 ![build](https://github.com/dameikle/okapi-maven-plugin/actions/workflows/maven.yml/badge.svg)
+![maven-central](https://img.shields.io/maven-central/v/io.meikle.maven.okapi/okapi-maven-plugin)
 ![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/io.meikle.maven.okapi/okapi-maven-plugin?label=ossrh-snapshot&server=https%3A%2F%2Fs01.oss.sonatype.org)
 
 Maven plugin that allows execution of common actions using the [Okapi Framework](http://okapiframework.org) 
@@ -25,7 +26,7 @@ To build run the following from inside the _okapi-maven-plugin_ directory:
 mvn clean package
 ```
 
-The plugin is released via the Sonatype OSSRH (see _Usage_ below for more details), however to install a local copy from
+The plugin is released via Maven Central (see _Usage_ below for more details), however to install a local copy from
 this repo, you can run:
 ```bash
 mvn clean install
@@ -33,8 +34,28 @@ mvn clean install
 
 ## Usage
 
-The plugin is being released to the Sonatype OSSRH (OSS Repository Hosting) repository. Until an initial release is made
-and available on Maven Central, you will need to add the OSSRH to your Maven settings to access SNAPSHOT versions.
+The plugin is being released to [Maven Central](https://central.sonatype.org) via the Sonatype OSSRH
+(OSS Repository Hosting) [repository](https://s01.oss.sonatype.org/#welcome). 
+
+To use the plug-in you can simply include it in your project's POM file in the plugins
+section, adding configuration details relevant to the action required (see _Available Mojos_ for more details).
+
+```xml
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>io.meikle.maven.okapi</groupId>
+        <artifactId>okapi-maven-plugin</artifactId>
+        <version>1.0</version>
+        <configuration>
+            ...
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+```
+To access snapshot versions during development, you will need to add the OSSRH to your Maven settings and enable it to
+resolve snapshots.
 
 The plugin repository details required for this guide are shown below:
 ```xml
@@ -60,24 +81,6 @@ section to your project's POM file:
         </snapshots>
     </pluginRepository>
 </pluginRepositories>
-```
-
-Once you have set up access, to use the plug-in you can simple include it in your project's POM file in the plugins 
-section, adding configuration details relevant to the action required (see _Available Mojos_ for more details).
-
-```xml
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>io.meikle.maven.okapi</groupId>
-        <artifactId>okapi-maven-plugin</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <configuration>
-            ...
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 ```
 
 ## Available Mojos
