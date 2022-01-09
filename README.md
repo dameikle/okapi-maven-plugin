@@ -1,8 +1,8 @@
 # okapi-maven-plugin
-[![license](https://img.shields.io/github/license/dameikle/okapi-maven-plugin.svg?maxAge=2592000)](http://www.apache.org/licenses/LICENSE-2.0)
-![build](https://github.com/dameikle/okapi-maven-plugin/actions/workflows/maven.yml/badge.svg)
-![maven-central](https://img.shields.io/maven-central/v/io.meikle.maven.okapi/okapi-maven-plugin)
-![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/io.meikle.maven.okapi/okapi-maven-plugin?label=ossrh-snapshot&server=https%3A%2F%2Fs01.oss.sonatype.org)
+[![license](https://img.shields.io/github/license/dameikle/okapi-maven-plugin.svg?maxAge=2592000)](https://github.com/dameikle/okapi-maven-plugin/blob/main/LICENSE)
+[![build](https://github.com/dameikle/okapi-maven-plugin/actions/workflows/maven.yml/badge.svg)](https://github.com/dameikle/okapi-maven-plugin/actions)
+[![maven-central](https://img.shields.io/maven-central/v/io.meikle.maven.okapi/okapi-maven-plugin)](https://search.maven.org/artifact/io.meikle.maven.okapi/okapi-maven-plugin)
+[![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/io.meikle.maven.okapi/okapi-maven-plugin?label=ossrh-snapshot&server=https%3A%2F%2Fs01.oss.sonatype.org)](https://s01.oss.sonatype.org/#nexus-search;quick~okapi-maven-plugin)
 
 Maven plugin that allows execution of common actions using the [Okapi Framework](http://okapiframework.org) 
 within a Maven Project, inspired by the [okapi-ant](https://github.com/tingley/okapi-ant) project.
