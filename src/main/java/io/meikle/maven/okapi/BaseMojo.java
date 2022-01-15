@@ -5,6 +5,7 @@ import net.sf.okapi.common.ExecutionContext;
 import net.sf.okapi.common.filters.DefaultFilters;
 import net.sf.okapi.common.filters.FilterConfigurationMapper;
 import net.sf.okapi.common.plugins.PluginsManager;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -14,6 +15,7 @@ import org.apache.maven.shared.model.fileset.FileSet;
 import org.apache.maven.shared.model.fileset.util.FileSetManager;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -88,6 +90,12 @@ public abstract class BaseMojo extends AbstractMojo  {
     @Parameter(property = "bconf", defaultValue = "" )
     String bconf;
 
+    /**
+     * Plugins to be included in the BCONF.
+     */
+    @Parameter(property = "plugins")
+    FileSet plugins;
+
 
     PipelineWrapper getPipelineWrapper() {
         ExecutionContext context = new ExecutionContext();
@@ -117,6 +125,43 @@ public abstract class BaseMojo extends AbstractMojo  {
             pluginsManager.discover(new File(baseDirectory.getPath()), true);
         }
         return pluginsManager;
+    }
+
+    void configurePlugins(PipelineWrapper pipelineWrapper) throws MojoExecutionException {
+        Path tmpPluginDir;
+        try {
+            tmpPluginDir = Files.createTempDirectory("okapi-maven");
+        } catch (IOException ex) {
+            throw new MojoExecutionException("Cannot create temporary plugin folder", ex);
+        }
+        try {
+            if (pluginsDirectory != null && !pluginsDirectory.isEmpty()) {
+                File pluginsDir = new File(pluginsDirectory);
+                if (!Files.exists(pluginsDir.toPath())) {
+                    throw new MojoExecutionException(String.format("Plugins directory %s doesn't exist",
+                            pluginsDirectory));
+                }
+                for (File srcFile : pluginsDir.listFiles()) {
+                    if (!srcFile.isDirectory()) {
+                        FileUtils.copyFileToDirectory(srcFile, tmpPluginDir.toFile());
+                    }
+                }
+            }
+            String[] files = getIncludedFiles(plugins);
+            for (String file : files) {
+                String relFile = Paths.get(plugins.getDirectory(), file).toString();
+                File tmpFile = new File(relFile);
+                if (!Files.exists(tmpFile.toPath())) {
+                    getLog().info(String.format("Skipping file %s as it does not exist", file));
+                    continue;
+                }
+                FileUtils.copyFileToDirectory(tmpFile, tmpPluginDir.toFile());
+            }
+        }
+        catch(IOException ex) {
+            throw new MojoExecutionException("Cannot copy plugin to plugin folder", ex);
+        }
+        pipelineWrapper.getPluginsManager().discover(tmpPluginDir.toFile(), true);
     }
 
     FilterConfigurationMapper getFilterMapper() {

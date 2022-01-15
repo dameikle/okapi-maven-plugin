@@ -137,6 +137,17 @@ mvn okapi:pipeline
     <!-- Optional directory containing custom plugins -->
     <!-- Defaults to the project directory -->
     <pluginsDirectory>pluginsDir</pluginsDirectory>
+    <!-- Optional Explicit Plugins using Maven FileSet format- -->
+    <!-- See https://maven.apache.org/shared/file-management/fileset.html for more details -->
+    <plugins>
+        <!-- Optional directory - can be absolute (include Maven variables), or relative to project baseDir -->
+        <!-- defaults to project baseDir -->
+        <directory>input</directory>
+        <!-- Optional - Includes or Excludes -->
+        <includes>
+            <include>**/*.jar</include>
+        </includes>
+    </plugins>
     <!-- Optional directory containing custom filters -->
     <!-- Defaults to the project directory -->
     <filtersDirectory>filtersDir</filtersDirectory>

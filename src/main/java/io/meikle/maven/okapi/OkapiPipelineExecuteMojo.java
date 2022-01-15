@@ -30,6 +30,10 @@ public class OkapiPipelineExecuteMojo extends BaseMojo  {
             throw new IllegalArgumentException("Pipeline cannot be blank");
         }
         validateLanguages(sourceLang, targetLang);
+        if (plugins != null) {
+            // Explicit plugins set, so attempt to merge with any from pluginsDirectory
+            configurePlugins(wrapper);
+        }
 
         loadPipeline(wrapper);
         getLog().info(String.format("Loading pipeline %s", pipeline));

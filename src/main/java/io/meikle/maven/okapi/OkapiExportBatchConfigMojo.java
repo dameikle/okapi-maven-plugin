@@ -7,14 +7,11 @@ import net.sf.okapi.applications.rainbow.batchconfig.BatchConfiguration;
 import net.sf.okapi.applications.rainbow.lib.LanguageManager;
 import net.sf.okapi.applications.rainbow.pipeline.PipelineWrapper;
 import net.sf.okapi.common.filters.FilterConfiguration;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.shared.model.fileset.FileSet;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,12 +25,6 @@ import java.util.List;
  */
 @Mojo(name = "export")
 public class OkapiExportBatchConfigMojo extends BaseMojo  {
-
-    /**
-     * Plugins to be included in the BCONF.
-     */
-    @Parameter(property = "plugins")
-    FileSet plugins;
 
     /**
      * Filter mappings.
@@ -122,43 +113,6 @@ public class OkapiExportBatchConfigMojo extends BaseMojo  {
             inputFiles.add(input);
         }
         return inputFiles;
-    }
-
-    private void configurePlugins(PipelineWrapper pipelineWrapper) throws MojoExecutionException {
-        Path tmpPluginDir;
-        try {
-            tmpPluginDir = Files.createTempDirectory("okapi-maven");
-        } catch (IOException ex) {
-            throw new MojoExecutionException("Cannot create temporary plugin folder", ex);
-        }
-        try {
-            if (pluginsDirectory != null && !pluginsDirectory.isEmpty()) {
-                File pluginsDir = new File(pluginsDirectory);
-                if (!Files.exists(pluginsDir.toPath())) {
-                    throw new MojoExecutionException(String.format("Plugins directory %s doesn't exist",
-                            pluginsDirectory));
-                }
-                for (File srcFile : pluginsDir.listFiles()) {
-                    if (!srcFile.isDirectory()) {
-                        FileUtils.copyFileToDirectory(srcFile, tmpPluginDir.toFile());
-                    }
-                }
-            }
-            String[] files = getIncludedFiles(plugins);
-            for (String file : files) {
-                String relFile = Paths.get(plugins.getDirectory(), file).toString();
-                File tmpFile = new File(relFile);
-                if (!Files.exists(tmpFile.toPath())) {
-                    getLog().info(String.format("Skipping file %s as it does not exist", file));
-                    continue;
-                }
-                FileUtils.copyFileToDirectory(tmpFile, tmpPluginDir.toFile());
-            }
-        }
-        catch(IOException ex) {
-            throw new MojoExecutionException("Cannot copy plugin to plugin folder", ex);
-        }
-        pipelineWrapper.getPluginsManager().discover(tmpPluginDir.toFile(), true);
     }
 
 }
