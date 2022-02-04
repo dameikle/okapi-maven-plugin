@@ -151,7 +151,7 @@ mvn okapi:pipeline
     <!-- Optional directory containing custom filters -->
     <!-- Defaults to the project directory -->
     <filtersDirectory>filtersDir</filtersDirectory>
-    <!-- Optional directory containing custom plugins -->
+    <!-- Optional output directory for the Okapi pipeline -->
     <!-- Defaults to the Maven target directory -->
     <outputDirectory>/tmp</outputDirectory>
 </configuration>
@@ -196,7 +196,7 @@ mvn okapi:export
             <include>**/*.jar</include>
         </includes>
     </plugins>
-    <!-- Optional directory containing custom plugins -->
+    <!-- Optional output directory for the Okapi pipeline -->
     <!-- Defaults to the Maven target directory -->
     <outputDirectory>/tmp</outputDirectory>
 </configuration>
@@ -217,9 +217,9 @@ mvn okapi:install
 
 ```xml
 <configuration>
-    <!-- Mandatory Name or Path to Export the BCONF to -->
+    <!-- Mandatory relative or absolute path to the BCONF to be installed -->
     <bconf>export.bconf</bconf>
-    <!-- Mandatory Name or Path to Install the BCONF to -->
+    <!-- Mandatory relative or absolute path to install the BCONF to -->
     <outputDirectory>/tmp/install-test</outputDirectory>
 </configuration>
 ```
