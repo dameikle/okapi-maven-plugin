@@ -228,7 +228,7 @@ mvn okapi:install
 
 ### Different Okapi Version
 
-The plugin has been developed against the latest released version at the time of writing (i.e. 1.42.0) and will aim to
+The plugin has been developed against the latest released version at the time of writing (i.e. 1.43.0) and will aim to
 track against the latest version.
 
 If you want to use a different Okapi version, you can override the Okapi Framework dependency in the plugin's
