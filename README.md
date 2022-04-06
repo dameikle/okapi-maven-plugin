@@ -46,7 +46,7 @@ section, adding configuration details relevant to the action required (see _Avai
       <plugin>
         <groupId>io.meikle.maven.okapi</groupId>
         <artifactId>okapi-maven-plugin</artifactId>
-        <version>1.0</version>
+        <version>1.1</version>
         <configuration>
             ...
         </configuration>
