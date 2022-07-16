@@ -270,7 +270,7 @@ For example, to use Okapi Framework version 1.41.0 you could use the following:
 ```
 
 ## Licence
-Copyright 2021 David Meikle
+Copyright 2021-22 David Meikle
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
