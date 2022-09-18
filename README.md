@@ -228,13 +228,13 @@ mvn okapi:install
 
 ### Different Okapi Version
 
-The plugin has been developed against the latest released version at the time of writing (i.e. 1.43.0) and will aim to
+The plugin has been developed against the latest released version at the time of writing (i.e. 1.44.0) and will aim to
 track against the latest version.
 
 If you want to use a different Okapi version, you can override the Okapi Framework dependency in the plugin's
 configuration section of the POM.
 
-For example, to use Okapi Framework version 1.41.0 you could use the following:
+For example, to use Okapi Framework version 1.43.0 you could use the following:
 ```xml
 <build>
     <plugins>
@@ -249,12 +249,12 @@ For example, to use Okapi Framework version 1.41.0 you could use the following:
                 <dependency>
                     <groupId>net.sf.okapi</groupId>
                     <artifactId>okapi-core</artifactId>
-                    <version>1.41.0</version>
+                    <version>1.43.0</version>
                 </dependency>
                 <dependency>
                     <groupId>net.sf.okapi.applications</groupId>
                     <artifactId>okapi-application-rainbow</artifactId>
-                    <version>1.41.0</version>
+                    <version>1.43.0</version>
                     <!-- Exclude non-required UI dependencies -->
                     <exclusions>
                         <exclusion>
