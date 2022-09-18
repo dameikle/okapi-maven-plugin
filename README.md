@@ -17,7 +17,7 @@ These actions can all be configured within the project's POM file.
 ## Building
 
 You need the following pre-requisites:
-* Java 8+
+* Java 11+
 * Maven 3.x
 
 To build run the following from inside the _okapi-maven-plugin_ directory:
