@@ -18,7 +18,7 @@ These actions can all be configured within the project's POM file.
 
 You need the following pre-requisites:
 * Java 11+
-* Maven 3.9.0+
+* Maven 3.9.9+
 
 To build run the following from inside the _okapi-maven-plugin_ directory:
 
@@ -34,7 +34,7 @@ mvn clean install
 
 ## Usage
 
-The plugin requires Java 11+ and Maven 3.9.0.
+The plugin requires Java 11+ and Maven 3.9.9.
 
 The plugin is being released to [Maven Central](https://central.sonatype.org) via the Sonatype OSSRH
 (OSS Repository Hosting) [repository](https://s01.oss.sonatype.org/#welcome). 

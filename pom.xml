@@ -43,7 +43,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
-    <maven.version>3.9.0</maven.version>
+    <maven.version>3.9.9</maven.version>
     <maven-plugin-annotations.version>3.7.1</maven-plugin-annotations.version>
     <maven-plugin-testing-harness.version>3.3.0</maven-plugin-testing-harness.version>
     <okapi.version>1.47.0</okapi.version>
