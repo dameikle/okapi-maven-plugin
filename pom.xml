@@ -47,7 +47,7 @@
     <maven-plugin-annotations.version>3.7.1</maven-plugin-annotations.version>
     <maven-plugin-testing-harness.version>3.3.0</maven-plugin-testing-harness.version>
     <okapi.version>1.47.0</okapi.version>
-    <commons-io.version>2.11.0</commons-io.version>
+    <commons-io.version>2.17.0</commons-io.version>
     <commons-lang3.version>3.12.0</commons-lang3.version>
     <junit.version>4.13.2</junit.version>
     <maven-file-management.version>3.1.0</maven-file-management.version>
